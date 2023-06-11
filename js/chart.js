@@ -11,12 +11,12 @@ let canvasElem = document.getElementById("chart");
  *
  */
 let chart;
-function displayChart(data) {
+function renderChart(data) {
   if (chart !== undefined) {
     chart.destroy();
   }
-  let labels = getLabelData(data);
-  let votes = getVoteData(data);
+  //let labels = getLabelData(data);
+  //let votes = getVoteData(data);
   let ctx = document.getElementById("chart");
   let dataObj = {
     type: "bar",
@@ -25,29 +25,30 @@ function displayChart(data) {
       datasets: [
         {
           label: "votes",
-          data: votes,
+          data: [1, 2, 3],
         },
       ],
     },
   };
-  let chart = new Chart(ctx, dataObj);
+  chart = new Chart(ctx, dataObj);
 }
 
 function getVoteData(productIndexArray) {
   let votes = [];
   for (let productIndex of productIndexArray) {
-    votes.push(productIndex.voteCount);
+    votes.push(productIndex.votes);
   }
   return votes;
 }
 
 function getLabelData(productIndexArray) {
   let labels = [];
-  for (let product of productIndexArray) {
+  console.log(productIndexArray);
+  for (let productIndex of productIndexArray) {
     labels.push(productIndex.name);
   }
   return labels;
 }
-function renderChart() {}
+//function renderChart() {}
 
 renderChart();
