@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-let canvasElem = document.getElementById('chart')
+let canvasElem = document.getElementById("chart");
 
 /* TODO:
  * - Instantiate a new AppState
@@ -10,7 +10,45 @@ let canvasElem = document.getElementById('chart')
  * - Call chart.js with the configuration and the canvasElem
  *
  */
-function renderChart() {
+let chart;
+function renderChart(data) {
+  if (chart !== undefined) {
+    chart.destroy();
+  }
+  //let labels = getLabelData(data);
+  //let votes = getVoteData(data);
+  let ctx = document.getElementById("chart");
+  let dataObj = {
+    type: "bar",
+    data: {
+      labels: ["product1", "product2", "product3"],
+      datasets: [
+        {
+          label: "votes",
+          data: [1, 2, 3],
+        },
+      ],
+    },
+  };
+  chart = new Chart(ctx, dataObj);
 }
+
+function getVoteData(productIndexArray) {
+  let votes = [];
+  for (let productIndex of productIndexArray) {
+    votes.push(productIndex.votes);
+  }
+  return votes;
+}
+
+function getLabelData(productIndexArray) {
+  let labels = [];
+  console.log(productIndexArray);
+  for (let productIndex of productIndexArray) {
+    labels.push(productIndex.name);
+  }
+  return labels;
+}
+//function renderChart() {}
 
 renderChart();
